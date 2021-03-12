@@ -5,4 +5,4 @@ Team member
 1. 강준우(sakeeri)
 2. 김정서(wjdtj9656)
 3. 김태호
-4. 정호윤
+4. 정호윤(Jeong00)
