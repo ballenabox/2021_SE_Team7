@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>컬리팡-로그인</title>
+  <title>컬리팡-회원가입</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -58,14 +58,25 @@
 
             <div class="card align-middle" style="width:80rem; border-radius:20px;">
                 <div class="card-title" style="margin-top:30px;">
-                    <h2 class="card-title text-center" style="color:#113366;">로그인</h2>
+                    <h2 class="card-title text-center" style="color:#113366;">회원가입</h2>
                 </div>
                 <div class="card-body">
               <form class="form-signin" method="POST" onSubmit="logincall();return false">
+                <!-- 칸들 추가했는데 잘 한건가요? type id 부분 -->
+                <!-- id, email 중복체크 기능 필요 & 미입력시 알림기능 필요 -->
+                <!-- 비밀번호 생성규칙 필요 -->
+                <label for="name" class="sr-only">이름</label>
+                <input type="text" id="upw" class="form-control" placeholder="이름을 입력해주세요" required autofocus><br> 
+                <label for="cellPhoneNum" class="sr-only">휴대폰 번호</label>
+                <input type="text" id="uid" class="form-control" placeholder="-를 제외한 휴대폰 번호를 입력해주세요" required><br>
+                <label for="address" class="sr-only">주소</label>
+                <input type="text" id="uid" class="form-control" placeholder="도로명 주소를 입력해주세요" required><br>
                 <label for="inputId" class="sr-only">ID</label>
-                <input type="text" id="uid" class="form-control" placeholder="아이디를 입력해주세요" required autofocus><BR>
+                <input type="text" id="uid" class="form-control" placeholder="아이디를 입력해주세요" required><br>
                 <label for="inputPassword" class="sr-only">Password</label>
                 <input type="password" id="upw" class="form-control" placeholder="비밀번호를 입력해주세요" required><br>
+                <label for="email" class="sr-only">Email</label>
+                <input type="text" id="uid" class="form-control" placeholder="이메일을 입력해주세요" required><br>
                 <div class="checkbox">
                     <!-- 기억하기 기능(미구현)
                   <label>
@@ -73,7 +84,6 @@
                   </label>
                 -->
                 </div>
-                <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">로 그 인</button>
                 <button onclick ="location.href='./register.html'" class="btn btn-lg btn-primary btn-block" type="button">회원가입</button>
               </form>
               
