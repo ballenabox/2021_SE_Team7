@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<script>
+  function toggleText() {
+  var text = document.getElementById("detailSearch");
+  if (text.style.display === "none") {
+    text.style.display = "block";
+  } else {
+    text.style.display = "none";
+  }
+}
+</script>
 <head>
 
   <meta charset="utf-8">
@@ -48,28 +57,72 @@
                 <span></span><li><a href="./register.html"><font color="blue">회원가입</font></a></li></span>
             </ul>
           </div>
-          <div class="button" style="margin-left: 10px; float: right">
-            <button type="button" class="btn btn-light dropdown toggle" >조건검색</button>
-          </div>
-        </ul>
+
       </div>
     </div>
     <div class="search-1">
       <span class="icon"><i class="fas fa-search"></i></span>
       <div style="float:left">
         <input type="search" id="search" placeholder="Search..." /> 
-      
       </div>
     </div>
-  </nav>
 
+    <!--조건검색 버튼
+    <div class="button" style="margin-left: 10px; float: right">
+      <button type="button" class="btn btn-light dropdown toggle" onclick="location.href='./condition_searching.html'" >조건검색</button>
+    </div>
+  -->
+  </nav>
 
   <!-- Page Content -->
   <br>
   <br>
   <br>
-  <div class="container">
+  <div class="button" id="detailSearch" style="display: none;text-align: center;">
+   
+    <form class="m-4">
+      <div class="row">
+          <div class="col-6">
+              <div class="form-group">
+                  <label>최소가격</label>
+                  <input type="number" class="form-control is-valid" />
+                  <small class="valid-feddback">최소 가격을 입력하세요</small>
+              </div>
+          </div>
 
+          <div class="col-6">
+              <div class="form-group">
+                  <label>최대가격</label>
+                  <input type="number" class="form-control is-valid" />
+                  <small class="valid-feddback">최대 가격을 입력하세요</small>
+              </div>
+          </div>
+
+      </div>
+      <div class="form-group">
+      <label>카테고리</label>
+      <select class="form-control">
+          <option selected>전체</option>
+          <option>정육,계란</option>
+          <option>최소,과일</option>
+          <option>간편식</option>
+      </select>
+
+      <div class="form-group">
+        <label>검색명</label>
+        <input type="text" class="form-control" />
+    </div>
+  </div>
+  <div class="form-group">
+      <input type="submit" class="btn btn-info" value="전송"/>
+  </div>
+  </form>
+      </div>
+  </div>
+  </div>
+  <button type='button' Class="detailsearch" onclick="toggleText()">상품 조건 검색</button>
+  <div class="container">
+  <br>
     <div class="row">
 
       <div class="col-lg">
