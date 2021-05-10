@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<h1><%= title %></h1>
+<a href="/board/write">상품 등록</a>
+<table border="1">
+    <tr>
+        <td>번호</td>
+        <td>상품명</td>
+        <td>카테고리</td>
+        <td>가격</td>
+        <td>수량</td>
+        <td>등록일</td>
+    </tr>
+    <%
+    for(var i = (page * page_num) - page_num; i < (page * page_num); i++) {
+    if(i > length){
+        i++;
+    }else{
+        var data = rows[i]
+    %>
+    <tr>
+        <td><%= i + 1 %></td>
+        <td><a href="/board/read/<%= data.pid %>"><%= data.pname %></a></td>
+        <td><%= data.pcategory %></td>
+        <td><%= data.pprice %></td>
+        <td><%= data.pstock %></td>
+        <td><%= data.pdate %></td>
+    </tr>
+    <% }
+    }
+    %>
+    <tr>
+        <td colspan="6">
+            <%
+            for(var j = 0; j < rows.length / page_num; j++){
+            %>
+            [<a href="/board/page/<%= j + 1 %>"><%= j + 1 %></a>]
+            <%
+            }
+            %>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

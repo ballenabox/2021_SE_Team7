@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<h1>Login</h1>
+
+<form action="../routes/account.js" method="post">
+    <table border="1">
+        <tr>
+            <td>ID</td>
+            <td><input type="text" name="id" id="id" value="id" required/></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="passwd" id="passwd" value="passwd" required/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit">로그인</button>
+                <a href="./register.ejs">회원가입</a>
+            </td>
+        </tr>
+    </table>
+</form>
+ 
+</body>
+</html>
