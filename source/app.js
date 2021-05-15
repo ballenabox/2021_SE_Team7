@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var session = require('express-session'); //추가
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -9,7 +10,8 @@ var usersRouter = require('./routes/users');
 var formRouter = require('./routes/form');
 var mysqlRouter = require('./routes/mysql');
 var boardRouter = require('./routes/board');
-var loginRouter = require('./routes/account');
+var registerRouter = require('./routes/register') // 추가, account.js 를 register.js, login.js로 나눔
+var loginRouter = require('./routes/login'); // 추가
 var adminRouter = require('./routes/admin_index');
 
 var app = express();
@@ -23,13 +25,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(session({ // 세션 미들웨어 설정
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/form', formRouter);
 app.use('/mysql', mysqlRouter);
 app.use('/board', boardRouter);
-app.use('/account', loginRouter);
+app.use('/register', registerRouter); // 추가, account.js를 register.js, login.js로 나눔
+app.use('/login', loginRouter); // 추가
 app.use('/admin_index',adminRouter);
 
 // catch 404 and forward to error handler

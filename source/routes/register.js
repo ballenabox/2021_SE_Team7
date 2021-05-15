@@ -4,27 +4,6 @@ var router = express.Router();
 var mysql_odbc = require('../db/db_conn')();
 var conn = mysql_odbc.init();
 
-// Login
-router.get('/login', function(req, res, next) {
-    res.render('views/login');
-});
-router.post('/login', function(req, res, next) {
-    var id = req.body.id;
-    var passwd = req.body.passwd;
-    var datas = [id, passwd];
-
-    var sql = "SELECT id, email, passwd FROM users WHERE id=? AND passwd=?";
-    conn.query(sql, datas, function(err, rows) {
-        if(err) console.log("err : " + err);
-        if(!(rows.length > 0)) {
-            console.log("ID or Password Error");
-        } else {
-            // 메인 페이지로 계정 정보를 넘긴다.
-            res.render('');
-       }     
-    });
-});
-
 // Register
 router.get('/register', function(req, res, next) {
     res.render('views/register');
@@ -42,5 +21,16 @@ router.post('/register', function(req, res, next) {
 
     })
 });
+
+  function passwordValidation(password) {
+    var pattern1 = /[0-9]/;
+    var pattern2 = /[a-zA-Z]/;
+  
+    if (!pattern1.test(password) || !pattern2.test(password) || password.length < 8) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
 module.exports = router;
