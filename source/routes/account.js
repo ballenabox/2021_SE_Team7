@@ -96,7 +96,9 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/logout', function(req, res, next) {
+  
     req.session.loggedin = false;
+    req.session.isAdmin = false;
     res.redirect('/');
     res.end();
 })
