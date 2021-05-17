@@ -21,7 +21,17 @@ router.get('/list', function(req, res, next) {
 
 // 상품 등록
 router.get('/write', function(req, res, next) {
-    res.render('write', {title : "상품 등록"});
+    if(req.session) {
+        console.log("세션")
+        console.log(req.session)
+      }
+      if (req.session.isAdmin == 1) {
+        res.render('write', {title : "상품 등록", session: req.session});
+      }
+      else {
+          console.log("접근 권한이 없습니다")
+          res.redirecct('/');
+      }
 });
 
 router.post('/write', function(req, res, next) {
