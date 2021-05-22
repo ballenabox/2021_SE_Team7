@@ -18,11 +18,11 @@
                         <a href="/"><img src="assets/logo.png" width="125px"></a>
                     </div>
                     <ul id="main-menu">
-                        <li><a href="product-all.ejs">상품 카테고리</a>
+                        <li><a href="/product-all">상품 카테고리</a>
                             <ul id="sub-menu">
-                            <li><a href="product-top.ejs" aria-label="subemnu">상의</a></li>
-                            <li><a href="product-bottom.ejs" aria-label="subemnu">하의</a></li>
-                            <li><a href="product-shoes.ejs" aria-label="subemnu">신발</a></li>
+                            <li><a href="/product-top" aria-label="subemnu">상의</a></li>
+                            <li><a href="/product-bottom" aria-label="subemnu">하의</a></li>
+                            <li><a href="/product-shoes" aria-label="subemnu">신발</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -114,6 +114,7 @@
 
     <!-- featured products -->
     <div class="small-container">
+        <!-- 인기상품
         <h2 class="title">인기 상품</h2>
         <div class="row">
             <div class="col-4">
@@ -165,24 +166,19 @@
                 <p>33,150원</p>
             </div>
         </div>
+    -->
         <!-- Latest products -->
         <h2 class="title">신상품</h2>
         <div class="row">
-            <div class="col-4">
-                <a href="top1-details.ejs"><img src="assets/top1-thumbnail.jpg"></a>
-                <a href="top1-details.ejs"><h4>Lee 로고 티셔츠</h4></a>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>35,000원</p>
-            </div>
-            <div class="col-4">
-                <a href="top2-details.ejs"><img src="assets/top2-thumbnail.jpg"></a>
-                <a href="top2-details.ejs"><h4>thisisneverthat 로고 티셔츠</h4></a>
+            
+                <%
+                for(var i=rows.length-1; i>rows.length-5; i--)
+                {
+                    var data = rows[i];
+                %>
+                <div class="col-4">
+                <a href="/product-details?product_name=<%=data.pname%>&product_price=<%=data.pprice%>"><img src="assets/top2-thumbnail.jpg"></a>
+                <a href="/product-details?product_name=<%=data.pname%>&product_price=<%=data.pprice%>"><h4><%=data.pname%></h4></a>
                 <div class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
@@ -190,82 +186,11 @@
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                 </div>
-                <p>39,000원</p>
+                <p>가격: <%=data.pprice%>\</p>
             </div>
-            <div class="col-4">
-                <a href="top3-details.ejs"><img src="assets/top3-thumbnail.jpg"></a>
-                <a href="top3-details.ejs"><h4>LMC water splash 티셔츠</h4></a>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-                <p>35,100원</p>
-            </div>
-            <div class="col-4">
-                <a href="top4-details.ejs"><img src="assets/top4-thumbnail.jpg"></a>
-                <a href="top4-details.ejs"><h4>마크 곤잘레스 엔젤 와펜 티셔츠</h4></a>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-                <p>33,150원</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-4">
-                <a href="top1-details.ejs"><img src="assets/top1-thumbnail.jpg"></a>
-                <a href="top1-details.ejs"><h4>Lee 로고 티셔츠</h4></a>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>35,000원</p>
-            </div>
-            <div class="col-4">
-                <a href="top2-details.ejs"><img src="assets/top2-thumbnail.jpg"></a>
-                <a href="top2-details.ejs"><h4>thisisneverthat 로고 티셔츠</h4></a>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-                <p>39,000원</p>
-            </div>
-            <div class="col-4">
-                <a href="top3-details.ejs"><img src="assets/top3-thumbnail.jpg"></a>
-                <a href="top3-details.ejs"><h4>LMC water splash 티셔츠</h4></a>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-                <p>35,100원</p>
-            </div>
-            <div class="col-4">
-                <a href="top4-details.ejs"><img src="assets/top4-thumbnail.jpg"></a>
-                <a href="top4-details.ejs"><h4>마크 곤잘레스 엔젤 와펜 티셔츠</h4></a>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-                <p>33,150원</p>
-            </div>
+            
+            <%}%>
+            
         </div>
     </div>
     <!-- offer -->

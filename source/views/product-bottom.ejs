@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RedStore | 하의</title>
-    <link rel="stylesheet" href="style.css">
+    <title>RedStore | 상의</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
     <script src="https://kit.fontawesome.com/43be5ddbe5.js" crossorigin="anonymous"></script>
 </head>
 
@@ -17,14 +17,13 @@
                 <a href="index.html"><img src="assets/logo.png" width="125px"></a>
             </div>
             <ul id="main-menu">
-                <li><a href="product-all.html">상품 카테고리</a>
+                <li><a href="/product-all">상품 카테고리</a>
                     <ul id="sub-menu">
-                    <li><a href="product-top.html" aria-label="subemnu">상의</a></li>
-                    <li><a href="product-bottom.html" aria-label="subemnu">하의</a></li>
-                    <li><a href="product-shoes.html" aria-label="subemnu">신발</a></li>
+                    <li><a href="/product-top" aria-label="subemnu">상의</a></li>
+                    <li><a href="/product-bottom" aria-label="subemnu">하의</a></li>
+                    <li><a href="/product-shoes" aria-label="subemnu">신발</a></li>
                     </ul>
                 </li>
-                <li><a href="account.html">계정</a></li>
             </ul>
             <div class="search">
                 <input type="text" placeholder="상품 검색하기">
@@ -39,7 +38,7 @@
     <div class="small-container">
 
         <div class="row row-2">
-            <h2>하의</h2>
+            <h2>상의</h2>
             <select>
                 <option>기본 정렬</option>
                 <option>인기순으로 정렬</option>
@@ -48,21 +47,16 @@
         </div>
 
             <div class="row">
+                <%
+                for(var i=0; i<rows.length; i++)
+                {
+                    var data = rows[i];
+                    if(rows[i].pcategory == "하의")
+                    {
+                %>
                 <div class="col-4">
-                    <a href="bottom1-details.html"><img src="assets/bottom1-thumbnail.jpg"></a>
-                    <a href="bottom1-details.html"><h4>나이키 스우시 반바지</h4></a>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <p>25,900원</p>
-                </div>
-                <div class="col-4">
-                    <a href="bottom2-details.html"><img src="assets/bottom2-thumbnail.jpg"></a>
-                    <a href="bottom2-details.html"><h4>토피 와이드 데님 팬츠</h4></a>
+                    <a href="/product-details?product_name=<%=data.pname%>&product_price=<%=data.pprice%>"><img src="assets/top1-thumbnail.jpg"></a>
+                    <a href="/product-details?product_name=<%=data.pname%>&product_price=<%=data.pprice%>"><h4><%=data.pname%></h4></a>
                     <div class="rating">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -70,32 +64,13 @@
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star-o"></i>
                     </div>
-                    <p>36,900원</p>
+                    <p>가격: <%=data.pprice%>\</p>
                 </div>
-                <div class="col-4">
-                    <a href="bottom3-details.html"><img src="assets/bottom3-thumbnail.jpg"></a>
-                    <a href="bottom3-details.html"><h4>제로 스웻 팬츠</h4></a>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <p>39,000원</p>
-                </div>
-                <div class="col-4">
-                    <a href="bottom4-details.html"><img src="assets/bottom4-thumbnail.jpg"></a>
-                    <a href="bottom4-details.html"><h4>아디다스 에센셜 3S 윈드 팬츠</h4></a>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <p>39,900원</p>
-                </div>
+                
+            <%}
+            else{}
+                }
+            %>
             </div>
             
             <!-- <div class="row"></div> -->
