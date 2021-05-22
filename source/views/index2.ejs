@@ -12,91 +12,73 @@
 <body>
     <div class="header">
 
-        <div class="container">
-                <nav role="navigation">
-                    <div class="logo">
-                        <a href="/"><img src="assets/logo.png" width="125px"></a>
-                    </div>
-                    <ul id="main-menu">
-                        <li><a href="product-all.ejs">상품 카테고리</a>
-                            <ul id="sub-menu">
-                            <li><a href="product-top.ejs" aria-label="subemnu">상의</a></li>
-                            <li><a href="product-bottom.ejs" aria-label="subemnu">하의</a></li>
-                            <li><a href="product-shoes.ejs" aria-label="subemnu">신발</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="search">
-                        <input type="text" placeholder="상품 검색하기">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="cart">
-                        <a href="cart.ejs"><img src="assets/cart.png" width="30px" height="30px"></a>
-                    </div>
-                </nav>
-                <!-- <img src="assets/menu.png" class="menu-icon" onclick="menutoggle()"> -->
-            
-            <div class="row">
-                <!-- event banner -->
-                <div class="col-2">
-                    <div id="slider">
-                        <figure>
-                            <img src="assets/top1-detail1.jpg">
-                            <img src="assets/top1-detail2.jpg">
-                            <img src="assets/top1-detail3.jpg">
-                            <img src="assets/top1-detail4.jpg">
-                            <img src="assets/top1-detail1.jpg"> 
-                        </figure>
-                    </div>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.ejs"><img src="assets/logo.png" width="125px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.ejs">홈</a></li>
+                    <li><a href="products.ejs">상품</a></li>
+                    <% if(session.loggedin) { %> 
+                        <li><a href="account/logout">로그아웃</a></li>
+                    
+                    <% } else {%>
+                    <li><a href="account/login">로그인</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+            <a href="cart.html"><img src="assets/cart.png" width="30px" height="30px"></a>
+            <img src="assets/menu.png" class="menu-icon" onclick="menutoggle()">
+        </div>
+        <!-- image slider -->
+        <!-- <div class="slider">
+            <div class="slides">
+                <input type="radio" name="radio-btn" id="radio1">
+                <input type="radio" name="radio-btn" id="radio2">
+                <input type="radio" name="radio-btn" id="radio3">
+                <input type="radio" name="radio-btn" id="radio4">
+                <div class="slide-first">
+                    <img src="assets/image1.png">
                 </div>
-                <!-- login, register menu -->
-                <div class="col-2">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-2">
-                                    <div class="form-container">
-                                        
-                                <% if(session.loggedin) { %> 
-                                    <h1>안녕하세요</h1>
-                                    <%= session.name %>님 반갑습니다.
-                                    <br>
-                                    저희 사이트를 이용해주셔서 감사합니다.
-                                    
-                                    
-                                    <button type="button" onclick="location.href='account/logout'" class="btn">로그아웃</button>
-                                    <% } else {%>
-                                        <div class="form-btn">
-                                            <span onclick="login()">로그인</span>
-                                            <span onclick="register()">회원가입</span>
-                                            <hr id="Indicator">
-                                        </div>
-                                        <form action="/account/login" method="post" id="LoginForm">
-                                            <input class="form-control py-4" id="id" name="id" type="text"  placeholder="Enter your ID" />
-                                            <input class="form-control py-4" id="passwd" name="password" type="password" placeholder="Enter password" />
-                                            <button type="submit" class="btn">로그인</button>
-                                            <a href="">비밀번호를 잊으셨나요?</a>
-                                        </form>
-                                        <form action="/account/register" method="post" id="RegForm">
-                                            
-                                            <input type="text"id="id" name="id" placeholder="ID">
-                                            <input type="text"id="name" name="name" placeholder="Name">
-                                            <input type="email" id="email" name="email"placeholder="Email">
-                                            <!-- <input type="checkbox" class="check-box"><span>ID 중복체크</span> -->
-                                            <input type="passoword"id="password" name="password" placeholder="Passoword">
-                                            <button type="submit" class="btn">회원가입</button>
-                                        </form>
-                                            <% } %>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="slide">
+                    <img src="assets/image1.png">
                 </div>
+                <div class="slide">
+                    <img src="assets/image1.png">
+                </div>
+                <div class="slide">
+                    <img src="assets/image1.png">
+                </div>
+                <div class="navigation-auto">
+                    <div class="auto-btn1"></div>
+                    <div class="auto-btn1"></div>
+                    <div class="auto-btn1"></div>
+                    <div class="auto-btn1"></div>
+                </div>
+            </div>
+            <div class="navigation-manual">
+                <label for="radio1" class="manual-btn"></label>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-2">
+                <h1>Lorem<br>ipsum</h1>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.<br>
+                    Adipisci explicabo ipsum reiciendis impedit tenetur quo sunt eos a qui quod?<br>
+                    Ab iste cumque nam, necessitatibus commodi inventore praesentium culpa fuga?</p>
+                    <a href="" class="btn">지금 보기</a>
+            </div>
+            <div class="col-2">
+                <img src="assets/image1.png">
             </div>
         </div>
     </div>
+    </div>
 
     <!-- featured categories -->
-    <!-- <div class="categories">
+    <div class="categories">
         <div class="small-container">
             <div class="row">
                 <div class="col-3">
@@ -110,161 +92,149 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <!-- featured products -->
     <div class="small-container">
         <h2 class="title">인기 상품</h2>
         <div class="row">
             <div class="col-4">
-                <a href="top1-details.ejs"><img src="assets/top1-thumbnail.jpg"></a>
-                <a href="top1-details.ejs"><h4>Lee 로고 티셔츠</h4></a>
+                <a href="product-details.html"><img src="assets/product-1.jpg"></a>
+                <a href="product-details.html"><h4>Red printed T-shirt</h4></a>
                 <div class="rating">
-                    <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
                 </div>
-                <p>35,000원</p>
+                <p>$50.00</p>
             </div>
             <div class="col-4">
-                <a href="top2-details.ejs"><img src="assets/top2-thumbnail.jpg"></a>
-                <a href="top2-details.ejs"><h4>thisisneverthat 로고 티셔츠</h4></a>
+                <img src="assets/product-2.jpg">
+                <h4>Red printed T-shirt</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
                 </div>
-                <p>39,000원</p>
+                <p>$75.00</p>
             </div>
             <div class="col-4">
-                <a href="top3-details.ejs"><img src="assets/top3-thumbnail.jpg"></a>
-                <a href="top3-details.ejs"><h4>LMC water splash 티셔츠</h4></a>
+                <img src="assets/product-3.jpg">
+                <h4>Red printed T-shirt</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
                 </div>
-                <p>35,100원</p>
-            </div>
-            <div class="col-4">
-                <a href="top4-details.ejs"><img src="assets/top4-thumbnail.jpg"></a>
-                <a href="top4-details.ejs"><h4>마크 곤잘레스 엔젤 와펜 티셔츠</h4></a>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-                <p>33,150원</p>
+                <p>$70.00</p>
             </div>
         </div>
         <!-- Latest products -->
         <h2 class="title">신상품</h2>
         <div class="row">
             <div class="col-4">
-                <a href="top1-details.ejs"><img src="assets/top1-thumbnail.jpg"></a>
-                <a href="top1-details.ejs"><h4>Lee 로고 티셔츠</h4></a>
+                <img src="assets/product-4.jpg">
+                <h4>Red printed T-shirt</h4>
                 <div class="rating">
-                    <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
                 </div>
-                <p>35,000원</p>
+                <p>$50.00</p>
             </div>
             <div class="col-4">
-                <a href="top2-details.ejs"><img src="assets/top2-thumbnail.jpg"></a>
-                <a href="top2-details.ejs"><h4>thisisneverthat 로고 티셔츠</h4></a>
+                <img src="assets/product-5.jpg">
+                <h4>Red printed T-shirt</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
                 </div>
-                <p>39,000원</p>
+                <p>$75.00</p>
             </div>
             <div class="col-4">
-                <a href="top3-details.ejs"><img src="assets/top3-thumbnail.jpg"></a>
-                <a href="top3-details.ejs"><h4>LMC water splash 티셔츠</h4></a>
+                <img src="assets/product-6.jpg">
+                <h4>Red printed T-shirt</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
                 </div>
-                <p>35,100원</p>
+                <p>$70.00</p>
             </div>
             <div class="col-4">
-                <a href="top4-details.ejs"><img src="assets/top4-thumbnail.jpg"></a>
-                <a href="top4-details.ejs"><h4>마크 곤잘레스 엔젤 와펜 티셔츠</h4></a>
+                <img src="assets/product-7.jpg">
+                <h4>Red printed T-shirt</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
                 </div>
-                <p>33,150원</p>
+                <p>$70.00</p>
             </div>
         </div>
         <div class="row">
             <div class="col-4">
-                <a href="top1-details.ejs"><img src="assets/top1-thumbnail.jpg"></a>
-                <a href="top1-details.ejs"><h4>Lee 로고 티셔츠</h4></a>
+                <img src="assets/product-8.jpg">
+                <h4>Red printed T-shirt</h4>
                 <div class="rating">
-                    <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
                 </div>
-                <p>35,000원</p>
+                <p>$70.00</p>
             </div>
             <div class="col-4">
-                <a href="top2-details.ejs"><img src="assets/top2-thumbnail.jpg"></a>
-                <a href="top2-details.ejs"><h4>thisisneverthat 로고 티셔츠</h4></a>
+                <img src="assets/product-9.jpg">
+                <h4>Red printed T-shirt</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
                 </div>
-                <p>39,000원</p>
+                <p>$70.00</p>
             </div>
             <div class="col-4">
-                <a href="top3-details.ejs"><img src="assets/top3-thumbnail.jpg"></a>
-                <a href="top3-details.ejs"><h4>LMC water splash 티셔츠</h4></a>
+                <img src="assets/product-10.jpg">
+                <h4>Red printed T-shirt</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
                 </div>
-                <p>35,100원</p>
+                <p>$70.00</p>
             </div>
             <div class="col-4">
-                <a href="top4-details.ejs"><img src="assets/top4-thumbnail.jpg"></a>
-                <a href="top4-details.ejs"><h4>마크 곤잘레스 엔젤 와펜 티셔츠</h4></a>
+                <img src="assets/product-11.jpg">
+                <h4>Red printed T-shirt</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
                 </div>
-                <p>33,150원</p>
+                <p>$70.00</p>
             </div>
         </div>
     </div>
@@ -276,13 +246,13 @@
                     <img src="assets/exclusive.png" class="offer-img">
                 </div>
                 <div class="col-2">
-                    <p>오직 RedStore에서만!</p>
+                    <p>오직 ~에서만!</p>
                     <h1>Smart Band 4</h1>
                     <small>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                         Sequi quidem numquam minus voluptas ullam, ratione a quis beatae, aperiam voluptatibus 
                         vero atque aliquid recusandae porro quasi id dignissimos et architecto?<br>
                     </small>
-                    <a href="" class="btn">즉시 구매</a>
+                    <a href="" class="btn">구매하기</a>
                 </div>
             </div>
         </div>
@@ -355,7 +325,6 @@
             </div>
         </div>
     </div>
-    
     <!-- footer -->
     <div class="footer">
         <div class="container">
@@ -370,10 +339,7 @@
                 </div>
                 <div class="footer-col-2">
                     <img src="assets/logo-white.png">
-                    <!-- need link -->
-                    <p>사업자 정보</p>
-                    <p>이용약관</p>
-                    <p>개인정보처리방침</p>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At cupiditate qui, quis in nulla tenetur, suscipit, excepturi ea consectetur officiis iure molestiae. Sit distinctio iusto quasi sequi ipsa facilis voluptas?</p>
                 </div>
                 <div class="footer-col-3">
                     <h3>링크</h3>
@@ -410,24 +376,6 @@
             else{
                 MenuItems.style.maxHeight = "0px";
             }
-        }
-    </script>
-
-    <!-- js for login & register toggle form -->
-    <script>
-        var LoginForm = document.getElementById("LoginForm");
-        var RegForm = document.getElementById("RegForm");
-        var Indicator = document.getElementById("Indicator");
-
-        function register(){
-            RegForm.style.transform = "translateX(0px)";
-            LoginForm.style.transform = "translateX(0px)";
-            Indicator.style.transform = "translateX(100px)";
-        }
-        function login(){
-            RegForm.style.transform = "translateX(300px)";
-            LoginForm.style.transform = "translateX(300px)";
-            Indicator.style.transform = "translateX(0px)";
         }
     </script>
 </body>

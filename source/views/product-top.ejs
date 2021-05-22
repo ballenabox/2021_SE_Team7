@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RedStore | 장바구니</title>
+    <title>RedStore | 상의</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/43be5ddbe5.js" crossorigin="anonymous"></script>
 </head>
@@ -36,68 +36,78 @@
         </nav>
     </div>
 
-<!-- cart items details -->
     <div class="small-container">
-        <table>
-            <tr>
-                <th>상품</th>
-                <th>수량</th>
-                <th>주문 금액</th>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="assets/buy-1.jpg">
-                        <div>
-                            <p>Red printed T-shirt</p>
-                            <small>가격: $50.00</small><br>
-                            <a href="">삭제</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$50.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="assets/buy-2.jpg">
-                        <div>
-                            <p>Red printed T-shirt</p>
-                            <small>가격: $75.00</small><br>
-                            <a href="">삭제</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$50.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="assets/buy-3.jpg">
-                        <div>
-                            <p>Red printed T-shirt</p>
-                            <small>가격: $75.00</small><br>
-                            <a href="">삭제</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$50.00</td>
-            </tr>
-        </table>
 
-        <div class="total-price">
-            <table>
-                <tr>
-                    <td>총 주문금액:</td>
-                    <td>$200.00</td>
-                </tr>
-            </table>
+        <div class="row row-2">
+            <h2>상의</h2>
+            <select>
+                <option>기본 정렬</option>
+                <option>인기순으로 정렬</option>
+                <option>가격순으로 정렬</option>
+            </select>
         </div>
-    </div>
 
+            <div class="row">
+                <div class="col-4">
+                    <a href="top1-details.html"><img src="assets/top1-thumbnail.jpg"></a>
+                    <a href="top1-details.html"><h4>Lee 로고 티셔츠</h4></a>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <p>35,000원</p>
+                </div>
+                <div class="col-4">
+                    <a href="top2-details.html"><img src="assets/top2-thumbnail.jpg"></a>
+                    <a href="top2-details.html"><h4>thisisneverthat 로고 티셔츠</h4></a>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <p>39,000원</p>
+                </div>
+                <div class="col-4">
+                    <a href="top3-details.html"><img src="assets/top3-thumbnail.jpg"></a>
+                    <a href="top3-details.html"><h4>LMC water splash 티셔츠</h4></a>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <p>35,100원</p>
+                </div>
+                <div class="col-4">
+                    <a href="top4-details.html"><img src="assets/top4-thumbnail.jpg"></a>
+                    <a href="top4-details.html"><h4>마크 곤잘레스 엔젤 와펜 티셔츠</h4></a>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <p>33,150원</p>
+                </div>
+            </div>
+            
+            <!-- <div class="row"></div> -->
+            <div class="page-btn">
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>&#8594;</span>
+            </div>
+    </div>
+    
     <!-- footer -->
     <div class="footer">
         <div class="container">
@@ -112,7 +122,10 @@
                 </div>
                 <div class="footer-col-2">
                     <img src="assets/logo-white.png">
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At cupiditate qui, quis in nulla tenetur, suscipit, excepturi ea consectetur officiis iure molestiae. Sit distinctio iusto quasi sequi ipsa facilis voluptas?</p>
+                    <!-- need link -->
+                    <p>사업자 정보</p>
+                    <p>이용약관</p>
+                    <p>개인정보처리방침</p>
                 </div>
                 <div class="footer-col-3">
                     <h3>링크</h3>
@@ -136,7 +149,7 @@
             <p class="copyright">Copyright 2021 - SE team7</p>
         </div>
     </div>
-
+    
     <!-- js for toggle menu -->
     <script>
         var MenuItems = document.getElementById("MenuItems");
@@ -152,6 +165,5 @@
             }
         }
     </script>
-
 </body>
 </html>

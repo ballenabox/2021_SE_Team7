@@ -78,7 +78,7 @@ router.post('/login', function(req, res, next) {
             if(results[0].admin == 1) {
               req.session.isAdmin = true;
               console.log('관리자 : ' + req.session.name + '님이 접속하였습니다');
-              res.redirect('/board/write');
+              res.redirect('/admin_index');
               res.end();
             }
             else {
@@ -90,7 +90,7 @@ router.post('/login', function(req, res, next) {
             console.log("ID or Password Error");
             // 에러에 따른 경고창 표시 필요 -> 백엔드에서 불가능, 프론트엔트에서 구현
             // return res.status(401).json({ message : "id 또는 password가 올바르지 않습니다"});
-            res.redirect('/account/login');
+            res.redirect('/');
        }
     });
 });
