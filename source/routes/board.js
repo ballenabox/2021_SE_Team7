@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 var mysql_odbc = require('../db/db_conn')();
 var conn = mysql_odbc.init();
- 
+var fs = require('fs');
+var ejs = require('ejs');
+var path = require('path');
+var multer = require('multer');
 
 router.get('/list/:page', function(req, res, next) {
     var page = req.params.page;
@@ -10,7 +13,8 @@ router.get('/list/:page', function(req, res, next) {
     conn.query(sql, function (err, rows) {
         if (err) console.error("err : " + err);
         // rows에 상품 정보를 담아 list.ejs로 보낸다.
-        res.render('list', {title: '게시판 리스트', rows: rows});
+        // delete_complete : 삭제 버튼으로 인해 이 페이지로 돌아오는 경우, true로 render되어 들어온다.
+        res.render('list', {title: '게시판 리스트', rows: rows, delete_complete : false});
     });
 });
 
@@ -34,14 +38,29 @@ router.get('/write', function(req, res, next) {
       }
 });
 
-router.post('/write', function(req, res, next) {
+// 파일 업로드 모듈
+const _storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'public/assets/')
+    },
+    filename: function(req, file, cb) {
+        // var newFileName = new Date().valueOf() + path.extname(file.originalname);
+        cb(null, file.originalname);
+    }
+});
+
+const upload = multer({storage: _storage});
+
+// 파일 업로드 인자(upload.single) 추가.
+router.post('/write', upload.single('pimage'), function(req, res, next) {
     var pname = req.body.pname;
     var pcategory = req.body.pcategory;
     var pprice = req.body.pprice;
     var pstock = req.body.pstock;
-    var datas = [pname, pcategory, pprice, pstock];
+    var pimage = req.file.originalname;
+    var datas = [pname, pcategory, pprice, pstock, pimage];
 
-    var sql = "INSERT INTO products(pname, pcategory, pprice, pstock) VALUES(?, ?, ?, ?)";
+    var sql = "INSERT INTO products(pname, pcategory, pprice, pstock, pimage) VALUES(?, ?, ?, ?, ?)";
     conn.query(sql, datas, function(err, rows) {
         if(err) console.log("err : " + err);
         // 등록 완료 후 어느 화면으로 갈 것인가?
@@ -50,8 +69,9 @@ router.post('/write', function(req, res, next) {
 });
 
 // 상품 삭제 in list
+// 수정 : 실제 데이터는 삭제하지 않고 알림창만 뜨게 한다.
 router.post('/delete',function(req,res,next) {
-    var pid = req.body.pid;
+    /* var pid = req.body.pid;
     var pname = req.body.pname;
     var datas = [pid, pname];
 
@@ -65,13 +85,19 @@ router.post('/delete',function(req,res,next) {
         } else {
             res.redirect('/board/list/');
         }
+    }); */
+    var sql = "SELECT * FROM products";
+    conn.query(sql, function (err, rows) {
+        if (err) console.error("err : " + err);
+        // rows에 상품 정보를 담아 list.ejs로 보낸다.
+        res.render('list', {title: '게시판 리스트', rows: rows, delete_complete : true});
     });
 });
 
 // 상품 상세보기
 router.get('/read/:pid', function(req, res, next) {
     var pid = req.params.pid;
-    var sql = "SELECT pid, pname, pcategory, pprice, pstock, pdate FROM products WHERE pid = ?";
+    var sql = "SELECT pid, pname, pcategory, pprice, pstock, pdate, pimage FROM products WHERE pid = ?";
     conn.query(sql, [pid], function(err, row) {
         if(err) console.error(err);
         res.render('read', {title: "상품 상세", row:row[0]});

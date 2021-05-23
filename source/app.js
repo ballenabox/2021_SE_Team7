@@ -6,8 +6,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var formRouter = require('./routes/form');
 var mysqlRouter = require('./routes/mysql');
 var boardRouter = require('./routes/board');
 var accountRouter = require('./routes/account')
@@ -24,14 +22,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static("public"));
 app.use(session({ // 세션 미들웨어 설정
 	secret: 'secret',
 	resave: true,
 	saveUninitialized: true
 }));
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/form', formRouter);
 app.use('/mysql', mysqlRouter);
 app.use('/board', boardRouter);
 app.use('/account', accountRouter); // 추가

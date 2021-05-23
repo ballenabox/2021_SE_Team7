@@ -234,6 +234,16 @@
             </main>
             
             <% include ./admin_footer.ejs %>
+            
+            <%
+            if(delete_complete == true) {
+            %>
+            <script type="text/javascript">
+            alert("삭제 완료.");
+            </script>
+            <%    
+            }
+            %>
 
         </div>
     </div>

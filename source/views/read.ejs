@@ -212,6 +212,10 @@
             <td><%=row.pdate%></td>
         </tr>
         <tr>
+            <td>이미지</td>
+            <td><img src="/assets/<%=row.pimage%>" name="pimage" id="pimage" width="50" height="50"></td>
+        </tr>
+        <tr>
             <td colspan="2">
                 <input type="submit" value="수정" formaction="/board/update">
                 <input type="submit" value="삭제" formaction="/board/delete">
