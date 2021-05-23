@@ -3,6 +3,10 @@ var router = express.Router();
 var mysql_odbc = require('../db/db_conn')();
 var conn = mysql_odbc.init();
 var url = require('url');
+var fs = require('fs');
+var ejs = require('ejs');
+var path = require('path');
+var multer = require('multer');
 
 /* GET home page or admin page. */
 router.get('/', function(req, res, next) {
@@ -19,7 +23,7 @@ router.get('/', function(req, res, next) {
     
   //res.render('index', { title: 'Express', session: req.session });
   
-  var sql = "SELECT pname, pprice, pimage FROM products ORDER BY pdate DESC LIMIT 3;";
+  var sql = "SELECT pid,pname, pprice, pimage FROM products ORDER BY pdate DESC LIMIT 3;";
     conn.query(sql, function (err, rows) {
         if (err) console.error("err : " + err);
         // rows에 상품 정보를 담아 list.ejs로 보낸다.
@@ -73,7 +77,8 @@ router.get('/product-all', function(req, res, next) {
 });
 });
 
-router.get('/product-details', function(req, res, next) {
+router.get('/product-details/:pid', function(req, res, next) {
+  /*
   var urlParse = url.parse(req.url,true);
   var queryVar = urlParse.query;
   var sql = "SELECT * FROM products";
@@ -82,5 +87,12 @@ router.get('/product-details', function(req, res, next) {
         // rows에 상품 정보를 담아 list.ejs로 보낸다.
         res.render('product-details', {title: '게시판 리스트', rows: rows, session: req.session,product_name:queryVar.product_name,product_price:queryVar.product_price});
 });
+*/
+var pid = req.params.pid;
+    var sql = "SELECT pid, pname, pcategory, pprice, pstock, pdate, pimage FROM products WHERE pid = ?";
+    conn.query(sql, [pid], function(err, row) {
+        if(err) console.error(err);
+        res.render('product-details', {title: "상품 상세", row:row[0]});
+    });
 });
 module.exports = router;

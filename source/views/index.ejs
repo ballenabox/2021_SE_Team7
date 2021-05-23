@@ -177,8 +177,8 @@
                     var data = rows[i];
                 %>
                 <div class="col-4">
-                <a href="/product-details?product_name=<%=data.pname%>&product_price=<%=data.pprice%>"><img src="/assets/<%=data.pimage%>"></a>
-                <a href="/product-details?product_name=<%=data.pname%>&product_price=<%=data.pprice%>"><h4><%=data.pname%></h4></a>
+                <a href="/product-details/<%=data.pid%>"><img src="/assets/<%=data.pimage%>"></a>
+                <a href="/product-details/<%=data.pid%>"><h4><%=data.pname%></h4></a>
                 <div class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
