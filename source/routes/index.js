@@ -18,8 +18,8 @@ router.get('/', function(req, res, next) {
   }
     
   //res.render('index', { title: 'Express', session: req.session });
-
-  var sql = "SELECT * FROM products";
+  
+  var sql = "SELECT pname, pprice, pimage FROM products ORDER BY pdate DESC LIMIT 3;";
     conn.query(sql, function (err, rows) {
         if (err) console.error("err : " + err);
         // rows에 상품 정보를 담아 list.ejs로 보낸다.

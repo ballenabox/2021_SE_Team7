@@ -172,12 +172,12 @@
         <div class="row">
             
                 <%
-                for(var i=rows.length-1; i>rows.length-5; i--)
+                for(var i=0; i<rows.length; i++)
                 {
                     var data = rows[i];
                 %>
                 <div class="col-4">
-                <a href="/product-details?product_name=<%=data.pname%>&product_price=<%=data.pprice%>"><img src="assets/top2-thumbnail.jpg"></a>
+                <a href="/product-details?product_name=<%=data.pname%>&product_price=<%=data.pprice%>"><img src="/assets/<%=data.pimage%>"></a>
                 <a href="/product-details?product_name=<%=data.pname%>&product_price=<%=data.pprice%>"><h4><%=data.pname%></h4></a>
                 <div class="rating">
                     <i class="fa fa-star"></i>
