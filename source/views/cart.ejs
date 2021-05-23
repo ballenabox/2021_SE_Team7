@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RedStore | 장바구니</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
     <script src="https://kit.fontawesome.com/43be5ddbe5.js" crossorigin="anonymous"></script>
 </head>
 
@@ -14,7 +14,7 @@
     <div class="container">
         <nav role="navigation">
             <div class="logo">
-                <a href="index.html"><img src="assets/logo.png" width="125px"></a>
+                <a href="/"><img src="assets/logo.png" width="125px"></a>
             </div>
             <ul id="main-menu">
                 <li><a href="product-all.html">상품 카테고리</a>
@@ -24,15 +24,31 @@
                     <li><a href="product-shoes.html" aria-label="subemnu">신발</a></li>
                     </ul>
                 </li>
-                <li><a href="account.html">계정</a></li>
             </ul>
             <div class="search">
-                <input type="text" placeholder="상품 검색하기">
-                <i class="fas fa-search"></i>
+                <form action="/product-search" method="get">
+                    <input type="search" name="product_name" placeholder="상품 이름 검색하기(enter)">
+                    최소가격<input type="number" name="min_price" value=" " placeholder="원하는 최소가격을 입력하세요">
+                    최대가격<input type="number" name="max_price" value=" " placeholder="원하는 최대가격을 입력하세요">
+                    카테고리<select name="product_category" class="custom-select">
+                        <option value="전체">전체</option>
+                        <option value="상의" >상의</option>
+                        <option value="하의">하의</option>
+                        <option value="신발">신발</option>
+                      </select>
+                      <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                            
+                        <button class="btn btn-primary" type="submit">검색하기</button>
+                    </div>
+                    <!--돋보기 이모티콘<i class="fas fa-search"></i>-->
+                    </form>
             </div>
-            <div class="cart">
-                <a href="cart.html"><img src="assets/cart.png" width="30px" height="30px"></a>
-            </div>
+            <% if(session.loggedin) { %>
+                <div class="cart">
+                    <a href="/cart"><img src="assets/cart.png" width="30px" height="30px"></a>
+                </div>
+                <% } else {%>
+                        <% } %>
         </nav>
     </div>
 

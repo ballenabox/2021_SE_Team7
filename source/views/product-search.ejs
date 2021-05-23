@@ -14,7 +14,7 @@
     <div class="container">
         <nav role="navigation">
             <div class="logo">
-                <a href="index.html"><img src="assets/logo.png" width="125px"></a>
+                <a href="/"><img src="assets/logo.png" width="125px"></a>
             </div>
             <ul id="main-menu">
                 <li><a href="/product-all">상품 카테고리</a>
@@ -55,7 +55,7 @@
     <div class="small-container">
 
         <div class="row row-2">
-            <h2>상의</h2>
+            <h2>전체 상품</h2>
             <select>
                 <option>기본 정렬</option>
                 <option>인기순으로 정렬</option>
@@ -67,8 +67,14 @@
                 <%
                 for(var i=0; i<rows.length; i++)
                 {
+                    if(!min_price){
+                        min_price=0;
+                    }
+                    if(!max_price){
+                        max_price=9999999999;
+                    }
                     var data = rows[i];
-                    if(rows[i].pcategory == "하의")
+                    if(rows[i].pname.indexOf(product_name) >= 0 && (rows[i].pprice>=min_price && rows[i].pprice<=max_price ) &&( rows[i].pcategory == product_category || product_category == "전체") )
                     {
                 %>
                 <div class="col-4">

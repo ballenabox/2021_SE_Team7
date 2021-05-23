@@ -95,4 +95,26 @@ var pid = req.params.pid;
         res.render('product-details', {title: "상품 상세", row:row[0]});
     });
 });
+
+router.get('/product-search', function(req, res, next) {
+  
+  var urlParse = url.parse(req.url,true);
+  var queryVar = urlParse.query;
+  var sql = "SELECT * FROM products";
+    conn.query(sql, function (err, rows) {
+        if (err) console.error("err : " + err);
+        // rows에 상품 정보를 담아 list.ejs로 보낸다.
+        res.render('product-search', {title: '게시판 리스트', rows: rows, session: req.session,product_name:queryVar.product_name,min_price:queryVar.min_price,max_price:queryVar.max_price,product_category:queryVar.product_category});
+
+        
+});
+});
+router.get('/cart', function(req, res, next) {
+  
+
+        res.render('cart', {title: '게시판 리스트',session: req.session});
+
+        
+});
+
 module.exports = router;
