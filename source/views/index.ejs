@@ -33,7 +33,7 @@
                         최대가격<input type="number" name="max_price" value=" " placeholder="원하는 최대가격을 입력하세요">
                         카테고리<select name="product_category" class="custom-select">
                             <option value="전체">전체</option>
-                            <option value="상의" >상의</option>
+                            <option value="상의">상의</option>
                             <option value="하의">하의</option>
                             <option value="신발">신발</option>
                           </select>
@@ -113,7 +113,16 @@
                                             <a href="">비밀번호를 잊으셨나요?</a>
                                         </form>
                                         <form action="/account/register" method="post" id="RegForm">
-                                            
+                                            <% if (session.dup) { %>
+                                                <font color='red'>
+                                                    ID또는 이메일 이미 사용중입니다
+                                                </font>
+                                                <% } %>
+                                            <% if (session.Validation) { %>
+                                                <font color='red'>
+                                                    passwd는 영문+숫자 8이상 필수
+                                                </font>
+                                                <% } %>
                                             <input type="text"id="id" name="id" placeholder="ID">
                                             <input type="text"id="name" name="name" placeholder="Name">
                                             <input type="email" id="email" name="email"placeholder="Email">

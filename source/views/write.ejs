@@ -203,7 +203,11 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2">
-                                                <button type="submit">등록</button>
+                                                <button type="submit">등록</button> <% if (session.WriteError) { %>
+                                                    <font color='red'>
+                                                        상품명은 20자이하가 되어야하고, 상품가격은 음수가될 수 없습니다 !
+                                                    </font>
+                                                    <% } %>
                                             </td>
                                         </tr>
                                     </table>

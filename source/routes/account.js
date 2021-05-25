@@ -16,6 +16,41 @@ router.post('/register', function(req, res, next) {
     var datas = [id, email, passwd, name];
     console.log(id, email, passwd, name, datas)
 
+    req.session.dup = false;
+    req.session.dup_id = false;
+    req.session.dup_eamil = false;
+    req.session.Validation = true;
+
+    var datas2 = [id, email];
+    var sql3 = "SELECT id, email FROM users WHERE id=? OR email=?";
+    conn.query(sql3, datas2, function(err, results) {
+      if(err) {
+        console.log("dup err : " + err);
+        throw err;
+      }
+      console.log('쿼리문 안에서 : ' + id, email);
+      if(results.length>0) { // 중복이고
+        if(!passwordValidation(passwd)) { // 조건 안맞을 때
+          req.session.dup = true;
+          req.session.Validation = true;
+          res.redirect('/');
+        }
+        else { // 조건 맞을 때
+          req.session.dup = true;
+          req.session.Validation = false;
+          res.redirect('/');
+        }
+      }
+      else { // 중복 아니고
+        if(!passwordValidation(passwd)) { // 조건 안맞을때
+          req.session.Validation = true; // -> 넣지마라
+          res.redirect('/');
+        }
+        else { // 조건 맞을 때 -> 최종 적합할 때
+          req.session.Validation = false;
+        }
+      }
+    })
     // 필수 정보 미입력시 입력 요구 경고
     // if (!email) {
     //   return res.status(400).json({ message: "이메일 입력하세요" });
@@ -28,16 +63,21 @@ router.post('/register', function(req, res, next) {
     // if (!passwordValidation(password)) {
     //   // return res.status(400).json({ message: "비밀번호는 영문, 숫자를 포함하여 8자 이상이어야 합니다." });
     // }
-
-    var sql = "INSERT INTO users(id, email, passwd, name) VALUES(?, ?, ?, ?)";
-    conn.query(sql, datas, function(err, rows) {
+    if (!req.session.Validation) {
+      var sql = "INSERT INTO users(id, email, passwd, name) VALUES(?, ?, ?, ?)";
+      conn.query(sql, datas, function(err, rows) {
         if(err) {
           console.log("err : " + err);
         }
         else {
-          res.redirect('/account/login')
+          if (!req.session.Validation) {
+            req.session.loggedin = true;
+            req.session.name = name;
+            res.redirect('/');
+          }
         }
     })
+  }
 
 });
 

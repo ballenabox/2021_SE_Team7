@@ -65,11 +65,22 @@ router.post('/write', upload.single('pimage'), function(req, res, next) {
     var pimage = req.file.originalname;
     var datas = [pname, pcategory, pprice, pstock, pimage];
 
-    var sql = "INSERT INTO products(pname, pcategory, pprice, pstock, pimage) VALUES(?, ?, ?, ?, ?)";
-    conn.query(sql, datas, function(err, rows) {
-        if(err) console.log("err : " + err);
-        res.redirect('/board/list');
+    req.session.WriteError = false;
+
+    if (pname.length > 20||pprice<0) {
+        req.session.WriteError = true;
+        // 제약조건에 맞지않음, 무효
+        res.redirect('/board/write');
+    }
+    else {
+        // 제약조건에 맞음, 등록
+        var sql = "INSERT INTO products(pname, pcategory, pprice, pstock, pimage) VALUES(?, ?, ?, ?, ?)";
+        conn.query(sql, datas, function(err, rows) {
+            if(err) console.log("err : " + err);
+            // 등록 완료 후 어느 화면으로 갈 것인가?
+            res.redirect('/board/list');
     });
+    }
 });
 
 // 상품 삭제 in list
