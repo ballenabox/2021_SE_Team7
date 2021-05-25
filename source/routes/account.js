@@ -47,37 +47,26 @@ router.post('/register', function(req, res, next) {
           res.redirect('/');
         }
         else { // 조건 맞을 때 -> 최종 적합할 때
+          console.log('모든 조건 만족')
           req.session.Validation = false;
         }
+
+        console.log('req.session.Validation : ' + req.session.Validation);
+        if (req.session.Validation == false) {
+          var sql = "INSERT INTO users(id, email, passwd, name) VALUES(?, ?, ?, ?)";
+          conn.query(sql, datas, function(err, rows) {
+            if(err) {
+              console.log("err : " + err);
+            }
+            else {
+              req.session.loggedin = true;
+              req.session.name = name;
+              res.redirect('/');
+            }
+    })
+  }
       }
     })
-    // 필수 정보 미입력시 입력 요구 경고
-    // if (!email) {
-    //   return res.status(400).json({ message: "이메일 입력하세요" });
-    // }
-    
-    // ID와 이메일 주소 중복체크후 경고
-    // var emailExists = "SELECT email FROM users WHERE email = ?";
-    // conn.query(emailExists, [email], function(err, rows))
-    // 비밀번호 생성규칙
-    // if (!passwordValidation(password)) {
-    //   // return res.status(400).json({ message: "비밀번호는 영문, 숫자를 포함하여 8자 이상이어야 합니다." });
-    // }
-    
-      var sql = "INSERT INTO users(id, email, passwd, name) VALUES(?, ?, ?, ?)";
-      conn.query(sql, datas, function(err, rows) {
-        if(err) {
-          console.log("err : " + err);
-        }
-        else {
-          if (!req.session.Validation) {
-            req.session.loggedin = true;
-            req.session.name = name;
-            res.redirect('/');
-          }
-        }
-    })
-  
 
 });
 

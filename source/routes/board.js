@@ -135,18 +135,30 @@ router.post('/update', upload.single('newimage'), function(req, res, next) {
     var pcategory = req.body.pcategory;
     var pprice = req.body.pprice;
     var pstock = req.body.pstock;
-    var pimage = req.file.originalname;
-    var datas = [pname, pcategory, pprice, pstock, pimage, pid];
-
-    var sql = "UPDATE products SET pname=?, pcategory=?, pprice=?, pstock=?, pimage=? WHERE pid=?";
-    conn.query(sql, datas, function(err, result) {
-        if(err) console.error(err);
-        if(result.affectedRows == 0) {
-            res.send("<script>alert('입력 양식에 에러가 있습니다.');history.back();</script>");          
-        } else {
-            res.redirect('/board/read/' + pid);
-        }
-    });
+    if(req.file == undefined) {
+        var datas = [pname, pcategory, pprice, pstock, pid];
+        var sql = "UPDATE products SET pname=?, pcategory=?, pprice=?, pstock=? WHERE pid=?";
+        conn.query(sql, datas, function(err, result) {
+            if(err) console.error(err);
+            if(result.affectedRows == 0) {
+                res.send("<script>alert('입력 양식에 에러가 있습니다.');history.back();</script>");          
+            } else {
+                res.redirect('/board/read/' + pid);
+            }
+        });
+    } else {
+        var pimage = req.file.originalname;
+        var datas = [pname, pcategory, pprice, pstock, pimage, pid];
+        var sql = "UPDATE products SET pname=?, pcategory=?, pprice=?, pstock=?, pimage=? WHERE pid=?";
+        conn.query(sql, datas, function(err, result) {
+            if(err) console.error(err);
+            if(result.affectedRows == 0) {
+                res.send("<script>alert('입력 양식에 에러가 있습니다.');history.back();</script>");          
+            } else {
+                res.redirect('/board/read/' + pid);
+            }
+        });
+    }   
 });
 
 /* // 페이징
@@ -243,22 +255,124 @@ router.post('/eventupdate', upload.single('newimage'), function(req, res, next) 
     if (req.session.isAdmin != 1) {
         res.redirect('/');
       }
+      
+    var eid = req.body.eid;
     var title = req.body.title;
     var content = req.body.content;
-    var start = req.body.start;
-    var end = req.body.newend;
-    var eimage = req.file.originalname;
-    var datas = [title, content, start, end, eimage];
-
-    var sql = "UPDATE events SET title=?, content=?, start=?, end=?, eimage=? WHERE eid=?";
-    conn.query(sql, datas, function(err, result) {
-        if(err) console.error(err);
-        if(result.affectedRows == 0) {
-            res.send("<script>alert('입력 양식에 에러가 있습니다.');history.back();</script>");          
+    
+    if(req.file == undefined) {
+        if(req.body.start == undefined) {
+            if(req.body.end == undefined) {
+                var datas = [title, content, eid];
+                var sql = "UPDATE events SET title=?, content=? WHERE eid=?";
+                conn.query(sql, datas, function(err, result) {
+                    if(err) console.error(err);
+                    if(result.affectedRows == 0) {
+                        res.send("<script>alert('입력 양식에 에러가 있습니다.');history.back();</script>");          
+                    } else {
+                        res.redirect('/board/eventread/' + eid);
+                    }
+                });
+            } else {
+                var end = req.body.end;
+                var datas = [title, content, end, eid];
+                var sql = "UPDATE events SET title=?, content=?, end=? WHERE eid=?";
+                conn.query(sql, datas, function(err, result) {
+                    if(err) console.error(err);
+                    if(result.affectedRows == 0) {
+                        res.send("<script>alert('입력 양식에 에러가 있습니다.');history.back();</script>");          
+                    } else {
+                        res.redirect('/board/eventread/' + eid);
+                    }
+                });
+            }
         } else {
-            res.redirect('/board/eventread/' + eid);
+            if(req.body.end == undefined) {
+                var start = req.body.start;
+                var datas = [title, content, start, eid];
+                var sql = "UPDATE events SET title=?, content=?, start=? WHERE eid=?";
+                conn.query(sql, datas, function(err, result) {
+                    if(err) console.error(err);
+                    if(result.affectedRows == 0) {
+                        res.send("<script>alert('입력 양식에 에러가 있습니다.');history.back();</script>");          
+                    } else {
+                        res.redirect('/board/eventread/' + eid);
+                    }
+                });
+            } else {
+                var start = req.body.start;
+                var end = req.body.end;
+                var datas = [title, content, start, end, eid];
+                var sql = "UPDATE events SET title=?, content=?, start=?, end=? WHERE eid=?";
+                conn.query(sql, datas, function(err, result) {
+                    if(err) console.error(err);
+                    if(result.affectedRows == 0) {
+                        res.send("<script>alert('입력 양식에 에러가 있습니다.');history.back();</script>");          
+                    } else {
+                        res.redirect('/board/eventread/' + eid);
+                    }
+                });
+            }
+        }       
+    } else {
+        if(req.body.start == undefined) {
+            if(req.body.end == undefined) {
+                var eimage = req.file.eimage;
+                var datas = [title, content, eimage, eid];
+                var sql = "UPDATE events SET title=?, content=?, eimage=? WHERE eid=?";
+                conn.query(sql, datas, function(err, result) {
+                    if(err) console.error(err);
+                    if(result.affectedRows == 0) {
+                        res.send("<script>alert('입력 양식에 에러가 있습니다.');history.back();</script>");          
+                    } else {
+                        res.redirect('/board/eventread/' + eid);
+                    }
+                });
+            } else {
+                var end = req.body.end;
+                var eimage = req.file.eimage;
+                var datas = [title, content, end, eimage, eid];
+                var sql = "UPDATE events SET title=?, content=?, end=?, eimage=? WHERE eid=?";
+                conn.query(sql, datas, function(err, result) {
+                    if(err) console.error(err);
+                    if(result.affectedRows == 0) {
+                        res.send("<script>alert('입력 양식에 에러가 있습니다.');history.back();</script>");          
+                    } else {
+                        res.redirect('/board/eventread/' + eid);
+                    }
+                });
+            }
+        } else {
+            if(req.body.end == undefined) {
+                var start = req.body.start;
+                var eimage = req.file.eimage;
+                var datas = [title, content, start, eimage, eid];
+                var sql = "UPDATE events SET title=?, content=?, start=?, eimage=? WHERE eid=?";
+                conn.query(sql, datas, function(err, result) {
+                    if(err) console.error(err);
+                    if(result.affectedRows == 0) {
+                        res.send("<script>alert('입력 양식에 에러가 있습니다.');history.back();</script>");          
+                    } else {
+                        res.redirect('/board/eventread/' + eid);
+                    }
+                });
+            } else {
+                var start = req.body.start;
+                var end = req.body.end;
+                var eimage = req.file.eimage;
+                var datas = [title, content, start, end, eimage, eid];
+                var sql = "UPDATE events SET title=?, content=?, start=?, end=?, eimage=? WHERE eid=?";
+                conn.query(sql, datas, function(err, result) {
+                    if(err) console.error(err);
+                    if(result.affectedRows == 0) {
+                        res.send("<script>alert('입력 양식에 에러가 있습니다.');history.back();</script>");          
+                    } else {
+                        res.redirect('/board/eventread/' + eid);
+                    }
+                });
+            }
         }
-    });
+    }
 });
 
 // 공지/이벤트 삭제

@@ -185,20 +185,23 @@
         </tr>
         <tr>
             <td>시작일</td>
-            <td><%=row.start%></td>
+            <td>
+                <%=row.start%>
+                <input type="date" name="start" id="start" value="<%=row.start%>"/>
+            </td>
         </tr>
         <tr>
             <td>종료일</td>
             <td>
                 <%=row.end%>
-                <input type="date" name="newend" id="newend"/>
+                <input type="date" name="end" id="end" value="<%=row.end%>"/>
             </td>
         </tr>
         <tr>
             <td>이미지</td>
             <td>
                 <img src="/assets/<%=row.eimage%>" name="eimage" id="eimage" width="50" height="50">
-                <input type="file" name="newimage" id="newimage" value="이미지 변경">
+                <input type="file" name="eimage" id="eimage" value="이미지 변경">
             </td>
         </tr>
         <tr>
