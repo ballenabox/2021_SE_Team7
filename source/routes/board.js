@@ -251,7 +251,7 @@ router.post('/eventwrite', upload.single('eimage'), function(req, res, next) {
 });
 
 // 공지/이벤트 수정
-router.post('/eventupdate', upload.single('eimage'), function(req, res, next) {
+router.post('/eventupdate', upload.single('newimage'), function(req, res, next) {
     if (req.session.isAdmin != 1) {
         res.redirect('/');
       }
