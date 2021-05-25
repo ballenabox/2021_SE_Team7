@@ -251,18 +251,22 @@ router.post('/eventwrite', upload.single('eimage'), function(req, res, next) {
 });
 
 // 공지/이벤트 수정
-router.post('/eventupdate', upload.single('newimage'), function(req, res, next) {
+router.post('/eventupdate', upload.single('eimage'), function(req, res, next) {
     if (req.session.isAdmin != 1) {
         res.redirect('/');
       }
       
     var eid = req.body.eid;
     var title = req.body.title;
-    var content = req.body.content;
+    var content = req.body.content;   
+    var start = req.body.start;
+    var end = req.body.end;
     
-    if(req.file == undefined) {
-        if(req.body.start == undefined) {
-            if(req.body.end == undefined) {
+    if(req.file == undefined) {       
+        
+        if(!start) {
+            // 시작일,종료일,이미지 변경하지 않음
+            if(!end) {
                 var datas = [title, content, eid];
                 var sql = "UPDATE events SET title=?, content=? WHERE eid=?";
                 conn.query(sql, datas, function(err, result) {
@@ -273,8 +277,8 @@ router.post('/eventupdate', upload.single('newimage'), function(req, res, next) 
                         res.redirect('/board/eventread/' + eid);
                     }
                 });
+            // 시작일,이미지 변경하지 않음. 종료일 변경됨
             } else {
-                var end = req.body.end;
                 var datas = [title, content, end, eid];
                 var sql = "UPDATE events SET title=?, content=?, end=? WHERE eid=?";
                 conn.query(sql, datas, function(err, result) {
@@ -286,9 +290,10 @@ router.post('/eventupdate', upload.single('newimage'), function(req, res, next) 
                     }
                 });
             }
+        
         } else {
-            if(req.body.end == undefined) {
-                var start = req.body.start;
+            // 종료일,이미지 변경하지 않음. 시작일 변경됨
+            if(!end) {
                 var datas = [title, content, start, eid];
                 var sql = "UPDATE events SET title=?, content=?, start=? WHERE eid=?";
                 conn.query(sql, datas, function(err, result) {
@@ -299,9 +304,8 @@ router.post('/eventupdate', upload.single('newimage'), function(req, res, next) 
                         res.redirect('/board/eventread/' + eid);
                     }
                 });
+            // 이미지 변경하지 않음. 시작일,종료일 변경됨
             } else {
-                var start = req.body.start;
-                var end = req.body.end;
                 var datas = [title, content, start, end, eid];
                 var sql = "UPDATE events SET title=?, content=?, start=?, end=? WHERE eid=?";
                 conn.query(sql, datas, function(err, result) {
@@ -315,9 +319,10 @@ router.post('/eventupdate', upload.single('newimage'), function(req, res, next) 
             }
         }       
     } else {
-        if(req.body.start == undefined) {
-            if(req.body.end == undefined) {
-                var eimage = req.file.eimage;
+        var eimage = req.file.originalname;
+        if(!start) {
+            // 시작일,종료일 변경하지 않음. 이미지 변경됨
+            if(!end) {
                 var datas = [title, content, eimage, eid];
                 var sql = "UPDATE events SET title=?, content=?, eimage=? WHERE eid=?";
                 conn.query(sql, datas, function(err, result) {
@@ -328,9 +333,8 @@ router.post('/eventupdate', upload.single('newimage'), function(req, res, next) 
                         res.redirect('/board/eventread/' + eid);
                     }
                 });
+            // 시작일 변경하지 않음. 종료일,이미지 변경됨
             } else {
-                var end = req.body.end;
-                var eimage = req.file.eimage;
                 var datas = [title, content, end, eimage, eid];
                 var sql = "UPDATE events SET title=?, content=?, end=?, eimage=? WHERE eid=?";
                 conn.query(sql, datas, function(err, result) {
@@ -343,9 +347,8 @@ router.post('/eventupdate', upload.single('newimage'), function(req, res, next) 
                 });
             }
         } else {
-            if(req.body.end == undefined) {
-                var start = req.body.start;
-                var eimage = req.file.eimage;
+            // 종료일 변경하지 않음. 시작일,이미지 변경됨
+            if(!end) {
                 var datas = [title, content, start, eimage, eid];
                 var sql = "UPDATE events SET title=?, content=?, start=?, eimage=? WHERE eid=?";
                 conn.query(sql, datas, function(err, result) {
@@ -356,10 +359,8 @@ router.post('/eventupdate', upload.single('newimage'), function(req, res, next) 
                         res.redirect('/board/eventread/' + eid);
                     }
                 });
+            // 시작일,종료일,이미지 변경됨
             } else {
-                var start = req.body.start;
-                var end = req.body.end;
-                var eimage = req.file.eimage;
                 var datas = [title, content, start, end, eimage, eid];
                 var sql = "UPDATE events SET title=?, content=?, start=?, end=?, eimage=? WHERE eid=?";
                 conn.query(sql, datas, function(err, result) {

@@ -65,15 +65,16 @@
                                 var data1 = rows_events[i];
                                 let date = new Date();
                                 let date2 = new Date(rows_events[i].end);
+                                let date3 = new Date(rows_events[i].start);
                                
                                 console.log(date.getFullYear() +" "+ date2.getFullYear());
-                                if(date.getFullYear() - date2.getFullYear()>0){
+                                if(date.getFullYear() - date2.getFullYear()>0 || date.getFullYear() - date3.getFullYear() <0){
                                     break;
                                 }
-                                else if(date.getMonth() - date2.getMonth()>0){
+                                else if(date.getMonth() - date2.getMonth()>0 || date.getMonth() - date3.getMonth() <0){
                                     break;
                                 }
-                                else if(date.getDate() - date2.getDate()>0){
+                                else if(date.getDate() - date2.getDate()>0 || date.getDate() - date3.getDate() <0){
                                     break;
                                 }
                                 
