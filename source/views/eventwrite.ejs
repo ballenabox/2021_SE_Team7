@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title><%= title %></title>
-        <meta charset="utf-8" />
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-            <meta name="description" content="" />
-            <meta name="author" content="" />
-            <title>RED - ADMIN</title>
-            <link href="../../stylesheets/admin_style.css" rel="stylesheet" />
-            <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-    </head>
+
+  <% include ./admin_header.ejs %>
 
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -140,11 +130,12 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">공지/이벤트 리스트</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="/board/list">바로가기</a>
+                                    <a class="small text-white stretched-link" href="/board/eventlist">바로가기</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -154,7 +145,7 @@
                             <div class="card bg-warning text-white mb-4">
                                 <div class="card-body">공지/이벤트 등록</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="/board/write">바로가기</a>
+                                    <a class="small text-white stretched-link" href="/board/eventwrite">바로가기</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -164,7 +155,7 @@
                             <div class="card bg-success text-white mb-4">
                                 <div class="card-body">공지/이벤트 수정</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">바로가기</a>
+                                    <a class="small text-white stretched-link" href="/board/eventlist">바로가기</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -174,7 +165,7 @@
                             <div class="card bg-danger text-white mb-4">
                                 <div class="card-body">공지/이벤트 삭제</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">바로가기</a>
+                                    <a class="small text-white stretched-link" href="/board/eventlist">바로가기</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -183,50 +174,42 @@
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table mr-1"></i>
-                            상품 수정
+                            공지/이벤트 수정
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <!-- 글 수정 버튼 클릭 시, /board/update로 데이터 전송 -->
-<form action="/board/update" method="post" enctype='multipart/form-data'>
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <input type="hidden" name="pid" id="pid" value="<%=row.pid%>"/>
-        <tr>
-            <td>상품명</td>
-            <td><input type="text" name="pname" id="pname" value="<%=row.pname%>" required/></td>
-        </tr>
-        <tr>
-            <td>카테고리</td>
-            <td><input type="text" name="pcategory" id="pcategory" value="<%=row.pcategory%>" required/></td>
-        </tr>
-        <tr>
-            <td>가격</td>
-            <td><input type="number" name="pprice" id="pprice" value="<%=row.pprice%>" required></td>
-        </tr>
-        <tr>
-            <td>수량</td>
-            <td><input type="number" name="pstock" id="pstock" value="<%=row.pstock%>" required/></td>
-        </tr>
-        <tr>
-            <td>등록일</td>
-            <td><%=row.pdate%></td>
-        </tr>
-        <tr>
-            <td>이미지</td>
-            <td>
-                <img src="/assets/<%=row.pimage%>" name="pimage" id="pimage" width="50" height="50">
-                <input type="file" name="newimage" id="newimage" value="이미지 변경">
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="수정" formaction="/board/update">
-                <input type="submit" value="삭제" formaction="/board/delete">
-                <a href="/board/list">목록</a>
-            </td>
-        </tr>
-    </table>
-</form>
+                                <form action="/board/eventwrite" method="post" enctype='multipart/form-data'>
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <tr>
+                                            <td>제목</td>
+                                            <td><input type="text" name="title" id="title" maxlength="50" required/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>내용</td>
+                                            <td><input type="text" name="content" id="content" maxlength="100" style="width:500px;height:100px;" required/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>시작일</td>
+                                            <td><input type="date" name="start" id="start" required></td>
+                                        </tr>
+                                        <tr>
+                                            <td>종료일</td>
+                                            <td><input type="date" name="end" id="end" required/></td>
+                                        </tr>
+                                        <!-- 사진 업로드 -->
+                                        <tr>
+                                            <td>사진</td>
+                                            <td><input type="file" name="eimage" id="eimage" required/></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button type="submit">등록</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                                 
                             </div>
                         </div>
                     </div>

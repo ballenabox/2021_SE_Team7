@@ -23,11 +23,18 @@ router.get('/', function(req, res, next) {
     
   //res.render('index', { title: 'Express', session: req.session });
   
-  var sql = "SELECT pid,pname, pprice, pimage FROM products ORDER BY pdate DESC LIMIT 3;";
-    conn.query(sql, function (err, rows) {
+  var sql = "SELECT pid,pname, pprice, pimage FROM products ORDER BY pdate DESC LIMIT 3; ";
+  var sql2 = "SELECT eid, title, content, start, end, eimage FROM events; ";
+    conn.query(sql , function (err, rows,field) {
+      console.log(sql);
         if (err) console.error("err : " + err);
+        conn.query(sql2, function(err,rows_events){
+          console.log(sql2);
+          if(err) console.error("err :" + err);
+          res.render('index', {title: '게시판 리스트', rows: rows,rows_events: rows_events, session: req.session});
+        })
         // rows에 상품 정보를 담아 list.ejs로 보낸다.
-        res.render('index', {title: '게시판 리스트', rows: rows, session: req.session});
+        //res.render('index', {title: '게시판 리스트', rows: rows, session: req.session});
 });
 });
  // ejs에서 session 값을 활용하려면 res.render후 session값을 넘겨줘야한다 -> 향후 로그인정보가 필요한 모든 router.get에 필요
@@ -92,7 +99,7 @@ var pid = req.params.pid;
     var sql = "SELECT pid, pname, pcategory, pprice, pstock, pdate, pimage FROM products WHERE pid = ?";
     conn.query(sql, [pid], function(err, row) {
         if(err) console.error(err);
-        res.render('product-details', {title: "상품 상세", row:row[0]});
+        res.render('product-details', {title: "상품 상세", row:row[0],session:req.session});
     });
 });
 

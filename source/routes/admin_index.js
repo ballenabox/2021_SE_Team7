@@ -6,6 +6,9 @@ var conn = mysql_odbc.init();
 
 // 페이징
 router.get('/:page',function(req,res,next) {
+    if (req.session.isAdmin != 1) {
+        res.redirect('/');
+      }
     var page = req.params.page;
     var sql = "SELECT id, email, passwd, name FROM users WHERE admin = ?";
     conn.query(sql, 0, function (err, rows) {
@@ -16,6 +19,7 @@ router.get('/:page',function(req,res,next) {
 });
 // /로 접근 시 /admin_index/1로 재접근
 router.get('/', function(req, res, next) {
+    
     res.redirect('/admin_index/1');
 });
 

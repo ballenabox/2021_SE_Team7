@@ -58,11 +58,30 @@
                 <div class="col-2">
                     <div id="slider">
                         <figure>
-                            <img src="assets/top1-detail1.jpg">
-                            <img src="assets/top1-detail2.jpg">
-                            <img src="assets/top1-detail3.jpg">
-                            <img src="assets/top1-detail4.jpg">
-                            <img src="assets/top1-detail1.jpg"> 
+                            <%
+                            for(var i=0; i<rows_events.length; i++)
+                            {
+                                
+                                var data1 = rows_events[i];
+                                let date = new Date();
+                                let date2 = new Date(rows_events[i].end);
+                               
+                                console.log(date.getFullYear() +" "+ date2.getFullYear());
+                                if(date.getFullYear() - date2.getFullYear()>0){
+                                    break;
+                                }
+                                else if(date.getMonth() - date2.getMonth()>0){
+                                    break;
+                                }
+                                else if(date.getDate() - date2.getDate()>0){
+                                    break;
+                                }
+                                
+                                else{
+                            %>
+                            <img src="/assets/<%=data1.eimage%>">
+                            
+                            <%}}%>
                         </figure>
                     </div>
                 </div>

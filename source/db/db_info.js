@@ -5,7 +5,8 @@ module.exports = (function () {
             port: '3307',
             user: 'root',
             password: 'wjdtj1',
-            database: 'main'
+            database: 'main',
+            multipleStatements: true
         },
         real: {
             host: '15.165.26.238',
