@@ -2,9 +2,9 @@ module.exports = (function () {
     return {
         local: {
             host: 'localhost',
-            port: '3306',
+            port: '3307',
             user: 'root',
-            password: 'mysql',
+            password: 'wjdtj1',
             database: 'main',
             multipleStatements: true
         },

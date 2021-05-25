@@ -63,7 +63,7 @@ router.post('/register', function(req, res, next) {
     // if (!passwordValidation(password)) {
     //   // return res.status(400).json({ message: "비밀번호는 영문, 숫자를 포함하여 8자 이상이어야 합니다." });
     // }
-    if (!req.session.Validation) {
+    
       var sql = "INSERT INTO users(id, email, passwd, name) VALUES(?, ?, ?, ?)";
       conn.query(sql, datas, function(err, rows) {
         if(err) {
@@ -77,7 +77,7 @@ router.post('/register', function(req, res, next) {
           }
         }
     })
-  }
+  
 
 });
 
