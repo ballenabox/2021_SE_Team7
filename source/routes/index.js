@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
   //res.render('index', { title: 'Express', session: req.session });
   
   var sql = "SELECT pid,pname, pprice, pimage FROM products ORDER BY pdate DESC LIMIT 3; ";
-  var sql2 = "SELECT eid, title, content, start, end, eimage FROM events; ";
+  var sql2 = "SELECT eid, title, content, start, end, eimage FROM events ORDER BY start; ";
     conn.query(sql , function (err, rows,field) {
       console.log(sql);
         if (err) console.error("err : " + err);

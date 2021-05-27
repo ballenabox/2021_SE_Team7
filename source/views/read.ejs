@@ -180,7 +180,14 @@
         </tr>
         <tr>
             <td>카테고리</td>
-            <td><input type="text" name="pcategory" id="pcategory" value="<%=row.pcategory%>" required/></td>
+            <td><!-- <input type="text" name="pcategory" id="pcategory" value="<%=row.pcategory%>" required/> -->
+                <select name="pcategory" id=pcategory class="custom-select">
+                    <option value="<%=row.pcategory%>" selected hidden><%=row.pcategory%></option>
+                    <option value="상의">상의</option>
+                    <option value="하의">하의</option>
+                    <option value="신발">신발</option>
+                  </select>
+            </td>
         </tr>
         <tr>
             <td>가격</td>
