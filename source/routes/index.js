@@ -96,7 +96,7 @@ router.get('/product-details/:pid', function(req, res, next) {
 });
 */
 var pid = req.params.pid;
-    var sql = "SELECT pid, pname, pcategory, pprice, pstock, pdate, pimage FROM products WHERE pid = ?";
+    var sql = "SELECT pid, pname, pcategory, pprice, pstock, pdate, pimage, pdetail FROM products WHERE pid = ?";
     conn.query(sql, [pid], function(err, row) {
         if(err) console.error(err);
         res.render('product-details', {title: "상품 상세", row:row[0],session:req.session});

@@ -63,7 +63,8 @@ router.post('/write', upload.single('pimage'), function(req, res, next) {
     var pprice = req.body.pprice;
     var pstock = req.body.pstock;
     var pimage = req.file.originalname;
-    var datas = [pname, pcategory, pprice, pstock, pimage];
+    var pdetail = req.body.pdetail;
+    var datas = [pname, pcategory, pprice, pstock, pimage, pdetail];
 
     req.session.WriteError = false;
 
@@ -74,7 +75,7 @@ router.post('/write', upload.single('pimage'), function(req, res, next) {
     }
     else {
         // 제약조건에 맞음, 등록
-        var sql = "INSERT INTO products(pname, pcategory, pprice, pstock, pimage) VALUES(?, ?, ?, ?, ?)";
+        var sql = "INSERT INTO products(pname, pcategory, pprice, pstock, pimage, pdetail) VALUES(?, ?, ?, ?, ?)";
         conn.query(sql, datas, function(err, rows) {
             if(err) console.log("err : " + err);
             // 등록 완료 후 어느 화면으로 갈 것인가?
@@ -118,7 +119,7 @@ router.get('/read/:pid', function(req, res, next) {
         res.redirect('/');
       }
     var pid = req.params.pid;
-    var sql = "SELECT pid, pname, pcategory, pprice, pstock, pdate, pimage FROM products WHERE pid = ?";
+    var sql = "SELECT pid, pname, pcategory, pprice, pstock, pdate, pimage, pdetail FROM products WHERE pid = ?";
     conn.query(sql, [pid], function(err, row) {
         if(err) console.error(err);
         res.render('read', {title: "상품 상세", row:row[0]});
@@ -135,9 +136,10 @@ router.post('/update', upload.single('newimage'), function(req, res, next) {
     var pcategory = req.body.pcategory;
     var pprice = req.body.pprice;
     var pstock = req.body.pstock;
+    var pdetail = req.body.pdetail;
     if(req.file == undefined) {
-        var datas = [pname, pcategory, pprice, pstock, pid];
-        var sql = "UPDATE products SET pname=?, pcategory=?, pprice=?, pstock=? WHERE pid=?";
+        var datas = [pname, pcategory, pprice, pstock, pdetail, pid];
+        var sql = "UPDATE products SET pname=?, pcategory=?, pprice=?, pstock=?, pdetail=? WHERE pid=?";
         conn.query(sql, datas, function(err, result) {
             if(err) console.error(err);
             if(result.affectedRows == 0) {
@@ -148,8 +150,8 @@ router.post('/update', upload.single('newimage'), function(req, res, next) {
         });
     } else {
         var pimage = req.file.originalname;
-        var datas = [pname, pcategory, pprice, pstock, pimage, pid];
-        var sql = "UPDATE products SET pname=?, pcategory=?, pprice=?, pstock=?, pimage=? WHERE pid=?";
+        var datas = [pname, pcategory, pprice, pstock, pimage, pdetail, pid];
+        var sql = "UPDATE products SET pname=?, pcategory=?, pprice=?, pstock=?, pimage=?, pdetail=? WHERE pid=?";
         conn.query(sql, datas, function(err, result) {
             if(err) console.error(err);
             if(result.affectedRows == 0) {
