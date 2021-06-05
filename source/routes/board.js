@@ -75,7 +75,7 @@ router.post('/write', upload.single('pimage'), function(req, res, next) {
     }
     else {
         // 제약조건에 맞음, 등록
-        var sql = "INSERT INTO products(pname, pcategory, pprice, pstock, pimage, pdetail) VALUES(?, ?, ?, ?, ?)";
+        var sql = "INSERT INTO products(pname, pcategory, pprice, pstock, pimage, pdetail) VALUES(?, ?, ?, ?, ?, ?)";
         conn.query(sql, datas, function(err, rows) {
             if(err) console.log("err : " + err);
             // 등록 완료 후 어느 화면으로 갈 것인가?
@@ -390,6 +390,15 @@ router.post('/eventdelete',function(req,res,next) {
         res.render('eventlist', {title: '공지/이벤트 리스트', rows: rows, delete_complete : true});
     });
 });
+router.get('/charts',function(req,res,next) {
+    if (req.session.isAdmin != 1) {
+        res.redirect('/');
+      }
+        res.render('charts');
+
+});
+
+
 
 
 module.exports = router;
