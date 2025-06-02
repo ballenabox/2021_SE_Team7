@@ -1,7 +1,7 @@
 #!/bin/bash
-# ────────────────────────────────────────────────────
-# Purpose: BeforeInstall 훅에서 deploy_folders.sh에 실행권한(+x)을 부여
-# CodeDeploy가 리비전을 /tmp/codedeploy_deployment/** 로 복사한 뒤 실행됨
-# ────────────────────────────────────────────────────
+# ────────────────────────────────────────────────
+# AfterInstall 훅에서 deploy_folders.sh에 실행 권한을 부여
+# /tmp/codedeploy_deployment/scripts/deploy_folders.sh 경로가 존재함을 전제로 함
+# ────────────────────────────────────────────────
 
 chmod +x /tmp/codedeploy_deployment/scripts/deploy_folders.sh

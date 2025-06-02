@@ -6,12 +6,13 @@ files:
     destination: /tmp/codedeploy_deployment
 
 hooks:
-  BeforeInstall:
+  AfterInstall:
+    # 1) deploy_folders.sh에 +x 권한 부여
     - location: scripts/set_permissions.sh
       timeout: 300
       runas: root
 
-  AfterInstall:
+    # 2) 실제 복사 작업 수행
     - location: scripts/deploy_folders.sh
       timeout: 300
       runas: root
