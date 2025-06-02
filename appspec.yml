@@ -1,0 +1,17 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /tmp/codedeploy_deployment
+
+hooks:
+  BeforeInstall:
+    - location: scripts/set_permissions.sh
+      timeout: 300
+      runas: root
+
+  AfterInstall:
+    - location: scripts/deploy_folders.sh
+      timeout: 300
+      runas: root
